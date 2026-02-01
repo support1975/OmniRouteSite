@@ -1,10 +1,17 @@
+"use client";
+
+import { useEffect } from "react";
+import { initAnalytics } from "@/lib/firebase";
 import Hero from "@/components/Hero";
 import AppFeatures from "@/components/AppFeatures";
 import Ecosystem from "@/components/Ecosystem";
 import Pricing from "@/components/Pricing";
-import CTA from "@/components/CTA";
 
 export default function Home() {
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
   return (
     <main className="min-h-screen bg-white">
       {/* Navigation */}
@@ -49,9 +56,9 @@ export default function Home() {
             <div>
               <h4 className="font-bold text-slate-900 mb-6">Legal</h4>
               <ul className="space-y-4 text-slate-500">
-                <li><a href="#" className="hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-indigo-600 transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-indigo-600 transition-colors">GDPR Compliance</a></li>
+                <li><a href="/privacy" className="hover:text-indigo-600 transition-colors">Privacy Policy</a></li>
+                <li><a href="/terms" className="hover:text-indigo-600 transition-colors">Terms of Service</a></li>
+                <li><a href="/privacy" className="hover:text-indigo-600 transition-colors">GDPR Compliance</a></li>
               </ul>
             </div>
           </div>
