@@ -7,9 +7,10 @@ import IPhoneMockup from "./IPhoneMockup";
 
 interface HeroProps {
     onJoinWaitlist: () => void;
+    onShowToast: (message: string) => void;
 }
 
-export default function Hero({ onJoinWaitlist }: HeroProps) {
+export default function Hero({ onJoinWaitlist, onShowToast }: HeroProps) {
     return (
         <section id="waitlist" className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-slate-50">
             {/* Background Decorative Elements */}
@@ -62,25 +63,31 @@ export default function Hero({ onJoinWaitlist }: HeroProps) {
                         </div>
 
                         <div className="flex items-center gap-4 pt-4">
-                            <div className="flex items-center gap-2 group cursor-pointer opacity-40 hover:opacity-100 transition-opacity">
+                            <button
+                                onClick={() => onShowToast("iOS App is coming soon to the App Store!")}
+                                className="flex items-center gap-2 group cursor-pointer opacity-40 hover:opacity-100 transition-opacity"
+                            >
                                 <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white">
                                     <Apple className="w-6 h-6" />
                                 </div>
-                                <div>
+                                <div className="text-left">
                                     <div className="text-[10px] uppercase font-bold text-slate-400 leading-none">Download on</div>
                                     <div className="text-sm font-bold text-slate-900">App Store</div>
                                 </div>
-                            </div>
+                            </button>
 
-                            <div className="flex items-center gap-2 group cursor-pointer opacity-40 hover:opacity-100 transition-opacity">
+                            <button
+                                onClick={() => onShowToast("Android App is coming soon to Google Play!")}
+                                className="flex items-center gap-2 group cursor-pointer opacity-40 hover:opacity-100 transition-opacity"
+                            >
                                 <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white">
                                     <Play className="w-6 h-6 fill-current" />
                                 </div>
-                                <div>
+                                <div className="text-left">
                                     <div className="text-[10px] uppercase font-bold text-slate-400 leading-none">Get it on</div>
                                     <div className="text-sm font-bold text-slate-900">Google Play</div>
                                 </div>
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </motion.div>

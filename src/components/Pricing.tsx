@@ -25,7 +25,7 @@ const tiers = [
 ];
 
 interface PricingProps {
-    onJoinWaitlist: () => void;
+    onJoinWaitlist: (plan?: string) => void;
 }
 
 export default function Pricing({ onJoinWaitlist }: PricingProps) {
@@ -63,7 +63,7 @@ export default function Pricing({ onJoinWaitlist }: PricingProps) {
                             </ul>
 
                             <button
-                                onClick={onJoinWaitlist}
+                                onClick={() => onJoinWaitlist(tier.name)}
                                 className={`w-full py-5 rounded-2xl font-bold transition-all shadow-lg text-center block ${tier.popular ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-indigo-200' : 'bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 shadow-slate-100'}`}
                             >
                                 Get Started

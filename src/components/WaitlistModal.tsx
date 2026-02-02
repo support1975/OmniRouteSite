@@ -7,9 +7,10 @@ import { X, Mail, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
 interface WaitlistModalProps {
     isOpen: boolean;
     onClose: () => void;
+    planName?: string | null;
 }
 
-export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
+export default function WaitlistModal({ isOpen, onClose, planName }: WaitlistModalProps) {
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
 
@@ -76,9 +77,13 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                                     <div className="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
                                         <Mail className="w-8 h-8" />
                                     </div>
-                                    <h3 className="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">Early Access</h3>
+                                    <h3 className="text-3xl font-extrabold text-slate-900 mb-4 tracking-tight">
+                                        {planName ? "Great choice!" : "Early Access"}
+                                    </h3>
                                     <p className="text-slate-500 mb-8 leading-relaxed">
-                                        Join our exclusive waitlist to be the first to experience the future of travel planning.
+                                        {planName
+                                            ? `We are launching soon. Join the waitlist to get the ${planName} plan at launch.`
+                                            : "Join our exclusive waitlist to be the first to experience the future of travel planning."}
                                     </p>
 
                                     <form onSubmit={handleSubmit} className="space-y-4">

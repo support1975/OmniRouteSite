@@ -8,16 +8,29 @@ import AppFeatures from "@/components/AppFeatures";
 import Ecosystem from "@/components/Ecosystem";
 import Pricing from "@/components/Pricing";
 import WaitlistModal from "@/components/WaitlistModal";
+import Toast from "@/components/Toast";
 
 export default function Home() {
-  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+  const [waitlistState, setWaitlistState] = useState<{ isOpen: boolean; plan: string | null }>({
+    isOpen: false,
+    plan: null
+  });
+  const [toast, setToast] = useState({ message: "", visible: false });
 
   useEffect(() => {
     initAnalytics();
   }, []);
 
-  const openWaitlist = () => setIsWaitlistOpen(true);
-  const closeWaitlist = () => setIsWaitlistOpen(false);
+  const openWaitlist = (plan: string | null = null) =>
+    setWaitlistState({ isOpen: true, plan });
+
+  const closeWaitlist = () =>
+    setWaitlistState({ isOpen: false, plan: null });
+
+  const showToast = (message: string) => {
+    setToast({ message, visible: true });
+    setTimeout(() => setToast(prev => ({ ...prev, visible: false })), 4000);
+  };
 
   return (
     <main className="min-h-screen bg-white">
@@ -42,7 +55,7 @@ export default function Home() {
             <a href="#" className="hover:text-indigo-600 transition-colors">Our Ecosystem</a>
           </div>
           <button
-            onClick={openWaitlist}
+            onClick={() => openWaitlist()}
             className="px-6 py-2 rounded-full bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition-all shadow-md shadow-indigo-100"
           >
             Join Waitlist
@@ -50,12 +63,22 @@ export default function Home() {
         </div>
       </nav>
 
-      <Hero onJoinWaitlist={openWaitlist} />
+      <Hero onJoinWaitlist={() => openWaitlist()} onShowToast={showToast} />
       <AppFeatures />
       <Ecosystem />
-      <Pricing onJoinWaitlist={openWaitlist} />
+      <Pricing onJoinWaitlist={(plan) => openWaitlist(plan)} />
 
-      <WaitlistModal isOpen={isWaitlistOpen} onClose={closeWaitlist} />
+      <WaitlistModal
+        isOpen={waitlistState.isOpen}
+        onClose={closeWaitlist}
+        planName={waitlistState.plan}
+      />
+
+      <Toast
+        message={toast.message}
+        isVisible={toast.visible}
+        onClose={() => setToast(prev => ({ ...prev, visible: false }))}
+      />
 
       <footer className="py-20 bg-white border-t border-slate-100">
         <div className="container mx-auto px-4">
