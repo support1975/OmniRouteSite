@@ -19,16 +19,17 @@ export default function Hero() {
                     transition={{ duration: 0.8 }}
                     className="max-w-xl"
                 >
-                    <div className="flex items-center gap-4 mb-8">
+                    <div className="mb-10">
                         <Image
-                            src="/logo.jpg"
-                            alt="OmniRoute Logo"
-                            width={48}
-                            height={48}
-                            className="rounded-2xl shadow-lg ring-4 ring-white"
+                            src="/logo_cropped.png"
+                            alt="OmniRoute Brand"
+                            width={240}
+                            height={80}
+                            className="h-auto w-auto max-h-16 mb-8"
+                            priority
                         />
-                        <div className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold">
-                            ✨ Next-Gen Travel Planning
+                        <div className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold animate-pulse">
+                            ✨ Next-Gen AI Travel
                         </div>
                     </div>
 

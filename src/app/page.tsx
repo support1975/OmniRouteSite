@@ -20,11 +20,11 @@ export default function Home() {
         <div className="container mx-auto px-4 flex items-center justify-between backdrop-blur-md bg-white/70 rounded-full border border-slate-100 max-w-4xl px-8 shadow-sm">
           <div className="flex items-center gap-2">
             <Image
-              src="/logo.jpg"
-              alt="OmniRoute Logo"
-              width={32}
-              height={32}
-              className="rounded-lg shadow-sm"
+              src="/icon.png"
+              alt="OmniRoute Icon"
+              width={28}
+              height={28}
+              className="rounded-md"
             />
             <div className="text-xl font-bold tracking-tighter text-slate-900">
               Omni<span className="text-indigo-600">Route</span>
@@ -52,11 +52,11 @@ export default function Home() {
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-3 mb-6">
                 <Image
-                  src="/logo.jpg"
-                  alt="OmniRoute Logo"
-                  width={40}
-                  height={40}
-                  className="rounded-xl shadow-md"
+                  src="/icon.png"
+                  alt="OmniRoute Icon"
+                  width={36}
+                  height={36}
+                  className="rounded-lg"
                 />
                 <div className="text-2xl font-bold tracking-tighter text-indigo-900">
                   Omni<span className="text-indigo-600">Route</span>
