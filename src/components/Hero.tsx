@@ -6,7 +6,7 @@ import IPhoneMockup from "./IPhoneMockup";
 
 export default function Hero() {
     return (
-        <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-slate-50">
+        <section id="waitlist" className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-slate-50">
             {/* Background Decorative Elements */}
             <div className="absolute top-0 right-0 w-1/2 h-full bg-indigo-50/50 -skew-x-12 translate-x-1/4 -z-10" />
             <div className="absolute top-1/4 left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl -z-10" />
