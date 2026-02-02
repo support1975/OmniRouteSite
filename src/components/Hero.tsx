@@ -5,7 +5,11 @@ import { motion } from "framer-motion";
 import { Download, Apple, Play } from "lucide-react";
 import IPhoneMockup from "./IPhoneMockup";
 
-export default function Hero() {
+interface HeroProps {
+    onJoinWaitlist: () => void;
+}
+
+export default function Hero({ onJoinWaitlist }: HeroProps) {
     return (
         <section id="waitlist" className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden bg-slate-50">
             {/* Background Decorative Elements */}
@@ -43,12 +47,18 @@ export default function Hero() {
 
                     <div className="space-y-6">
                         <div className="flex flex-col sm:flex-row items-center gap-4">
-                            <button className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-200 transition-all active:scale-95 shadow-lg shadow-indigo-100">
+                            <button
+                                onClick={onJoinWaitlist}
+                                className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-indigo-600 text-white font-bold text-lg hover:bg-indigo-700 hover:shadow-xl hover:shadow-indigo-200 transition-all active:scale-95 shadow-lg shadow-indigo-100"
+                            >
                                 Join the Waitlist
                             </button>
-                            <div className="flex items-center gap-2 px-6 py-4 rounded-2xl bg-white border border-slate-200 text-slate-400 font-bold italic">
+                            <button
+                                onClick={onJoinWaitlist}
+                                className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition-all active:scale-95 h-full"
+                            >
                                 Get Early Access
-                            </div>
+                            </button>
                         </div>
 
                         <div className="flex items-center gap-4 pt-4">

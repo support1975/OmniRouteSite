@@ -24,7 +24,11 @@ const tiers = [
     },
 ];
 
-export default function Pricing() {
+interface PricingProps {
+    onJoinWaitlist: () => void;
+}
+
+export default function Pricing({ onJoinWaitlist }: PricingProps) {
     return (
         <section id="pricing" className="py-32 relative bg-white">
             <div className="container px-4 mx-auto">
@@ -58,12 +62,12 @@ export default function Pricing() {
                                 ))}
                             </ul>
 
-                            <a
-                                href="#waitlist"
+                            <button
+                                onClick={onJoinWaitlist}
                                 className={`w-full py-5 rounded-2xl font-bold transition-all shadow-lg text-center block ${tier.popular ? 'bg-indigo-600 text-white hover:bg-indigo-700 shadow-indigo-200' : 'bg-white text-slate-900 border border-slate-200 hover:bg-slate-50 shadow-slate-100'}`}
                             >
                                 Get Started
-                            </a>
+                            </button>
                         </div>
                     ))}
                 </div>

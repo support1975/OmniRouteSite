@@ -1,17 +1,23 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { initAnalytics } from "@/lib/firebase";
 import Hero from "@/components/Hero";
 import AppFeatures from "@/components/AppFeatures";
 import Ecosystem from "@/components/Ecosystem";
 import Pricing from "@/components/Pricing";
+import WaitlistModal from "@/components/WaitlistModal";
 
 export default function Home() {
+  const [isWaitlistOpen, setIsWaitlistOpen] = useState(false);
+
   useEffect(() => {
     initAnalytics();
   }, []);
+
+  const openWaitlist = () => setIsWaitlistOpen(true);
+  const closeWaitlist = () => setIsWaitlistOpen(false);
 
   return (
     <main className="min-h-screen bg-white">
@@ -35,16 +41,21 @@ export default function Home() {
             <a href="#pricing" className="hover:text-indigo-600 transition-colors">Pricing</a>
             <a href="#" className="hover:text-indigo-600 transition-colors">Our Ecosystem</a>
           </div>
-          <button className="px-6 py-2 rounded-full bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition-all shadow-md shadow-indigo-100">
+          <button
+            onClick={openWaitlist}
+            className="px-6 py-2 rounded-full bg-indigo-600 text-white text-sm font-bold hover:bg-indigo-700 transition-all shadow-md shadow-indigo-100"
+          >
             Join Waitlist
           </button>
         </div>
       </nav>
 
-      <Hero />
+      <Hero onJoinWaitlist={openWaitlist} />
       <AppFeatures />
       <Ecosystem />
-      <Pricing />
+      <Pricing onJoinWaitlist={openWaitlist} />
+
+      <WaitlistModal isOpen={isWaitlistOpen} onClose={closeWaitlist} />
 
       <footer className="py-20 bg-white border-t border-slate-100">
         <div className="container mx-auto px-4">
