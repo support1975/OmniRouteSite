@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Download, Apple, Play } from "lucide-react";
 import IPhoneMockup from "./IPhoneMockup";
@@ -18,8 +19,17 @@ export default function Hero() {
                     transition={{ duration: 0.8 }}
                     className="max-w-xl"
                 >
-                    <div className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold mb-6">
-                        ✨ Next-Gen Travel Planning
+                    <div className="flex items-center gap-4 mb-8">
+                        <Image
+                            src="/logo.jpg"
+                            alt="OmniRoute Logo"
+                            width={48}
+                            height={48}
+                            className="rounded-2xl shadow-lg ring-4 ring-white"
+                        />
+                        <div className="inline-block px-4 py-2 rounded-full bg-indigo-100 text-indigo-700 text-sm font-bold">
+                            ✨ Next-Gen Travel Planning
+                        </div>
                     </div>
 
                     <h1 className="text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-8 leading-[1.1]">

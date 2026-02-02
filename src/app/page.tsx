@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect } from "react";
 import { initAnalytics } from "@/lib/firebase";
 import Hero from "@/components/Hero";
@@ -17,8 +18,17 @@ export default function Home() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 py-6">
         <div className="container mx-auto px-4 flex items-center justify-between backdrop-blur-md bg-white/70 rounded-full border border-slate-100 max-w-4xl px-8 shadow-sm">
-          <div className="text-xl font-bold tracking-tighter text-slate-900">
-            Omni<span className="text-indigo-600">Route</span>
+          <div className="flex items-center gap-2">
+            <Image
+              src="/logo.jpg"
+              alt="OmniRoute Logo"
+              width={32}
+              height={32}
+              className="rounded-lg shadow-sm"
+            />
+            <div className="text-xl font-bold tracking-tighter text-slate-900">
+              Omni<span className="text-indigo-600">Route</span>
+            </div>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-bold text-slate-500">
             <a href="#features" className="hover:text-indigo-600 transition-colors">Features</a>
@@ -40,8 +50,17 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-12 mb-16 text-left">
             <div className="col-span-1 md:col-span-2">
-              <div className="text-2xl font-bold tracking-tighter text-indigo-900 mb-6">
-                Omni<span className="text-indigo-600">Route</span>
+              <div className="flex items-center gap-3 mb-6">
+                <Image
+                  src="/logo.jpg"
+                  alt="OmniRoute Logo"
+                  width={40}
+                  height={40}
+                  className="rounded-xl shadow-md"
+                />
+                <div className="text-2xl font-bold tracking-tighter text-indigo-900">
+                  Omni<span className="text-indigo-600">Route</span>
+                </div>
               </div>
               <p className="text-slate-500 max-w-sm">
                 The intelligent layer for group travel planning. Built for modern explorers and professional nomads.
