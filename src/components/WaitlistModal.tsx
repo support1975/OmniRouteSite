@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Mail, CheckCircle2, ArrowRight, Loader2 } from "lucide-react";
+import { db } from "@/lib/firebase";
+import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 interface WaitlistModalProps {
     isOpen: boolean;
@@ -19,9 +21,20 @@ export default function WaitlistModal({ isOpen, onClose, planName }: WaitlistMod
         if (!email) return;
 
         setStatus("submitting");
-        // Simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        setStatus("success");
+        try {
+            // Save to Firestore
+            await addDoc(collection(db, "waitlist"), {
+                email: email,
+                plan: planName || "general",
+                registeredAt: serverTimestamp(),
+            });
+
+            setStatus("success");
+        } catch (error) {
+            console.error("Error adding document: ", error);
+            setStatus("idle");
+            // Optional: Show error toast here
+        }
     };
 
     return (
