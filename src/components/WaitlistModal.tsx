@@ -18,7 +18,13 @@ export default function WaitlistModal({ isOpen, onClose, planName }: WaitlistMod
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!email) return;
+
+        // Basic Regex Validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return;
+        }
 
         setStatus("submitting");
         try {
