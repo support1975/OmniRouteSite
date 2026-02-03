@@ -15,31 +15,40 @@ interface WaitlistModalProps {
 export default function WaitlistModal({ isOpen, onClose, planName }: WaitlistModalProps) {
     const [email, setEmail] = useState("");
     const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+    const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError(null);
 
         // Basic Regex Validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
-            alert("Please enter a valid email address.");
+            setError("Please enter a valid email address.");
             return;
         }
 
         setStatus("submitting");
         try {
-            // Save to Firestore
-            await addDoc(collection(db, "waitlist"), {
+            console.log("Attempting to save to Firestore...");
+
+            // Timeout after 10 seconds
+            const savePromise = addDoc(collection(db, "waitlist"), {
                 email: email,
                 plan: planName || "general",
                 registeredAt: serverTimestamp(),
             });
 
+            const timeoutPromise = new Promise((_, reject) =>
+                setTimeout(() => reject(new Error("Request timed out. Please check your Firestore rules or database ID.")), 10000)
+            );
+
+            await Promise.race([savePromise, timeoutPromise]);
             setStatus("success");
-        } catch (error) {
-            console.error("Error adding document: ", error);
+        } catch (err: any) {
+            console.error("Firestore Error:", err);
+            setError(err.message || "An unexpected error occurred.");
             setStatus("idle");
-            // Optional: Show error toast here
         }
     };
 
@@ -119,6 +128,12 @@ export default function WaitlistModal({ isOpen, onClose, planName }: WaitlistMod
                                                 className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-100 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all font-medium text-slate-900"
                                             />
                                         </div>
+
+                                        {error && (
+                                            <div className="p-3 rounded-xl bg-red-50 text-red-600 text-xs font-bold border border-red-100 mb-4">
+                                                {error}
+                                            </div>
+                                        )}
 
                                         <button
                                             type="submit"
